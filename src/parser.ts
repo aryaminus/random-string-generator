@@ -12,9 +12,11 @@ function getElements(token: ReturnType<typeof openBracketTokenizer>) {
 
 	for (let item of token.valueList) {
 		switch (item.type) {
-			case "CHARACTER":
+			case "CHARACTER": {
 				map[item.value.charCodeAt(0)] = 1;
-			case "RANGE":
+				break;
+			}
+			case "RANGE": {
 				for (
 					let i = item.from.value.charCodeAt(0);
 					i <= item.to.value.charCodeAt(0);
@@ -22,6 +24,8 @@ function getElements(token: ReturnType<typeof openBracketTokenizer>) {
 				) {
 					map[i] = 1;
 				}
+				break;
+			}
 		}
 	}
 
