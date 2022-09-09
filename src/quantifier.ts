@@ -29,7 +29,7 @@ function findQuantifierRange(afterTokenExpression: string) {
 			break;
 		}
 		case "{": {
-			let closingParenthesisIndex = afterTokenExpression.indexOf("]");
+			let closingParenthesisIndex = afterTokenExpression.indexOf("}");
 
 			// If } does not exist set operation length as 0 and break the case
 			if (closingParenthesisIndex === -1) {

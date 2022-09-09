@@ -16,6 +16,7 @@ function constantTokenizer(expression: string, openingIndex: number) {
 	return {
 		tokens,
 		isElm: expression[openingIndex] === ".",
+		openingIndex,
 		closingIndex: openingIndex,
 		...range,
 	};
@@ -83,6 +84,7 @@ function openBracketTokenizer(
 	return {
 		tokens,
 		isElm,
+		openingIndex: indexOfOpeningBracket,
 		closingIndex: indexOfClosingBracket,
 		...range,
 	};
