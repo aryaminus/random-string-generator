@@ -1,4 +1,16 @@
-function bracketTokenizer(expression: string, originalIndex: number) {}
+function getCharactersWithBracket(expression: string, originalIndex: number) {
+	const closingIndex = expression.indexOf("]");
+	const exactExpression = expression.slice(originalIndex, closingIndex + 1);
+
+	return { openingIndex: originalIndex, closingIndex, exactExpression };
+}
+
+function openBracketTokenizer(expression: string, originalIndex: number) {
+	const charactersWithBracket = getCharactersWithBracket(
+		expression,
+		originalIndex
+	);
+}
 
 function constantTokenizer(expression: string, originalIndex: number) {}
 
@@ -10,7 +22,7 @@ export function tokenizer(expression: string) {
 		let tokenValue;
 
 		if (expression[i] === "[") {
-			tokenValue = bracketTokenizer(expression, i);
+			tokenValue = openBracketTokenizer(expression, i);
 		} else {
 			tokenValue = constantTokenizer(expression, i);
 		}
