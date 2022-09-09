@@ -92,20 +92,20 @@ function openBracketTokenizer(
 
 export function tokenizer(expression: string) {
 	let tokenList: ReturnType<typeof openBracketTokenizer>[] = [];
-	let openingIndex = 0;
+	let currentIndex = 0;
 
-	while (openingIndex < expression.length) {
+	while (currentIndex < expression.length) {
 		let tokenValue: ReturnType<typeof openBracketTokenizer>;
 
-		if (expression[openingIndex] === "[") {
-			tokenValue = openBracketTokenizer(expression, openingIndex);
+		if (expression[currentIndex] === "[") {
+			tokenValue = openBracketTokenizer(expression, currentIndex);
 		} else {
-			tokenValue = constantTokenizer(expression, openingIndex);
+			tokenValue = constantTokenizer(expression, currentIndex);
 		}
 
 		tokenList.push(tokenValue);
 
-		openingIndex = tokenValue.closingIndex + tokenValue.operationLength + 1;
+		currentIndex = tokenValue.closingIndex + tokenValue.operationLength + 1;
 	}
 
 	return tokenList;
