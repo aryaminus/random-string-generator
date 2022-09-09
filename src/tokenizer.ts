@@ -4,7 +4,7 @@ function constantTokenizer(expression: string, openingIndex: number) {
 	let charactersList = expression.match(/(.-.|.)/g);
 
 	// Build token for values
-	const tokens = characterTokenizer(charactersList);
+	const valueList = characterTokenizer(charactersList);
 
 	// Find Quantifier Range
 	const stringAfterConstant = expression.slice(
@@ -14,7 +14,7 @@ function constantTokenizer(expression: string, openingIndex: number) {
 	let range = findQuantifierRange(stringAfterConstant);
 
 	return {
-		tokens,
+		valueList,
 		isElm: expression[openingIndex] === ".",
 		openingIndex,
 		closingIndex: openingIndex,
@@ -45,7 +45,7 @@ function characterTokenizer(charactersList: RegExpMatchArray) {
 	});
 }
 
-function openBracketTokenizer(
+export function openBracketTokenizer(
 	expression: string,
 	indexOfOpeningBracket: number
 ) {
@@ -72,7 +72,7 @@ function openBracketTokenizer(
 	}
 
 	// Build token for values
-	const tokens = characterTokenizer(charactersList);
+	const valueList = characterTokenizer(charactersList);
 
 	// Find Quantifier Range
 	const stringAfterClosingBracket = expression.slice(
@@ -82,7 +82,7 @@ function openBracketTokenizer(
 	let range = findQuantifierRange(stringAfterClosingBracket);
 
 	return {
-		tokens,
+		valueList,
 		isElm,
 		openingIndex: indexOfOpeningBracket,
 		closingIndex: indexOfClosingBracket,
