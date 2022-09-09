@@ -1,0 +1,16 @@
+{
+  "name": "random-string-generator",
+  "version": "0.0.1",
+  "description": "Generates list of string from regex",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node-dev --respawn --transpile-only src/index.ts"
+  },
+  "dependencies": {
+    "typescript": "^4.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.16",
+    "ts-node-dev": "^2.0.0"
+  }
+}
