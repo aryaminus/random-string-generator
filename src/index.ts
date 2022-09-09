@@ -1,3 +1,4 @@
+import parser from "./parser";
 import tokenizer from "./tokenizer";
 
 function builder(exp: RegExp | string, count: number) {
@@ -14,10 +15,16 @@ function builder(exp: RegExp | string, count: number) {
 	let expression = exp.toString();
 	expression = exp.toString().slice(1, expression.length - 1);
 
-	// Start Building from system
+	// Start Tokenizing
 	const tokens = tokenizer(expression);
 
-	return tokens;
+	const arrayList = [];
+	// Start Parsing the tokens
+	for (let i = 0; i < count; i++) {
+		arrayList.push(parser(tokens));
+	}
+
+	return arrayList;
 }
 
 async function main() {
