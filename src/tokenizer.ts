@@ -1,6 +1,24 @@
 import findQuantifierRange from "./quantifier";
 
 function constantTokenizer(expression: string, openingIndex: number) {
+	let charactersList = expression.match(/(.-.|.)/g);
+
+	// Build token for values
+	const tokens = characterTokenizer(charactersList);
+
+	// Find Quantifier Range
+	const stringAfterConstant = expression.slice(
+		openingIndex + 1,
+		expression.length
+	);
+	let range = findQuantifierRange(stringAfterConstant);
+
+	return {
+		tokens,
+		isElm: expression[openingIndex] === ".",
+		closingIndex: openingIndex,
+		...range,
+	};
 }
 
 function characterTokenizer(charactersList: RegExpMatchArray) {
@@ -80,7 +98,7 @@ export function tokenizer(expression: string) {
 		if (expression[openingIndex] === "[") {
 			tokenValue = openBracketTokenizer(expression, openingIndex);
 		} else {
-			// tokenValue = constantTokenizer(expression, openingIndex);
+			tokenValue = constantTokenizer(expression, openingIndex);
 		}
 
 		tokenList.push(tokenValue);
