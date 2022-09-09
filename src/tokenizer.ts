@@ -27,7 +27,7 @@ function characterTokenizer(
 }
 
 function constantTokenizer(expression: string, openingIndex: number) {
-	let charactersList = expression.match(/(.-.|.)/g);
+	let charactersList = expression[openingIndex].match(/(.-.|.)/g);
 
 	// Build token for values
 	const valueList = characterTokenizer(charactersList, {
