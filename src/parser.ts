@@ -62,7 +62,7 @@ function buildString(
 }
 
 function generator(
-	generatedString: string,
+	currentString: string,
 	token: ReturnType<typeof openBracketTokenizer>
 ) {
 	const repeat = getRandomValueBetween(
@@ -74,30 +74,27 @@ function generator(
 
 	for (let i = 0; i < repeat; i++) {
 		if (token.isElement) {
-			generatedString += String.fromCharCode(
+			currentString += String.fromCharCode(
 				includedElements[
 					getRandomValueBetween(0, includedElements.length - 1)
 				]
 			);
 		} else {
-			generatedString += buildString(
+			currentString += buildString(
 				token,
 				getRandomValueBetween(0, token.valueList.length - 1)
 			);
 		}
 	}
 
-	return generatedString;
+	return currentString;
 }
 
 export function parser(tokens: ReturnType<typeof tokenizer>) {
-	let generatedString = "";
-
-	for (let token of tokens) {
-		generatedString = generator(generatedString, token);
-	}
-
-	return generatedString;
+	return tokens.reduce(
+		(previousValue, currentValue) => generator(previousValue, currentValue),
+		""
+	);
 }
 
 export default parser;
