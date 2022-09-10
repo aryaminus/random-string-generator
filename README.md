@@ -1,7 +1,7 @@
 # <p align="center"> Random String Generator </p>
 
 <p align="center">
-    <a href="https://i.imgur.com/ru3ZC6R.png" target="_blank"><img src="https://i.imgur.com/ru3ZC6R.png" height="550"/></a>
+    <a href="https://i.imgur.com/dAF7GWa.png" target="_blank"><img src="https://i.imgur.com/dAF7GWa.png" height="550"/></a>
 </p>
 
 > Alpha release
