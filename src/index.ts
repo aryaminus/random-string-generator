@@ -65,7 +65,7 @@ async function main(argv = process.argv) {
 		});
 	}
 
-	handler(exp, +count)
+	handler(exp, +count ? +count : 10)
 		.then(() => {
 			process.exit(0);
 		})
