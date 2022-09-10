@@ -3,8 +3,12 @@
   "version": "0.0.1",
   "description": "Generates list of string from regex",
   "main": "src/index.ts",
+  "license": "UNLICENSED",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only src/index.ts"
+    "start": "ts-node-dev src/index.ts",
+    "start:respawn": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "test:accepted": "ts-node-dev src/index.ts /[-+]?[0-9]{1,16}[.][0-9]{1,6}/ 10",
+    "test:rejected": "ts-node-dev src/index.ts [ 10"
   },
   "dependencies": {
     "typescript": "^4.8.2"

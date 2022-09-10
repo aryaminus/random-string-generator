@@ -1,19 +1,24 @@
+import * as readline from "readline";
+
 import parser from "./parser";
 import tokenizer from "./tokenizer";
 
-function builder(exp: RegExp | string, count: number) {
+function builder(exp: string, count: number) {
 	// Check Regex validity
 	try {
 		const _ = new RegExp(exp);
-		console.log("A valid regex expression");
+		console.log("\x1b[33m%s\x1b[0m", "[CHECK]", `"${exp}" expression is valid\n`);
 	} catch (e) {
-		console.log("Not a valid regex expression");
+		console.error(
+			"\x1b[31m%s\x1b[0m",
+			"[ERROR]",
+			`"${exp}" expression is invalid\n`
+		);
 		throw e;
 	}
 
 	// Extract string and remove leading / and trailing /
-	let expression = exp.toString();
-	expression = exp.toString().slice(1, expression.length - 1);
+	let expression = exp.slice(1, exp.length - 1);
 
 	// Start Tokenizing
 	const tokens = tokenizer(expression);
@@ -27,16 +32,47 @@ function builder(exp: RegExp | string, count: number) {
 	return arrayList;
 }
 
-async function main() {
-	const strings = builder(/[-+]?[0-9]{1,16}[.][0-9]{1,6}/, 10);
-	console.log(strings);
+async function handler(exp: string, count: number) {
+	console.log(
+		"\x1b[36m%s\x1b[0m",
+		"\n[START]",
+		`Generating ${count} values for "${exp}" expression\n`
+	);
+
+	const arrayList = builder(exp, count);
+
+	console.log("\x1b[32m%s\x1b[0m", "[DONE]", `"${exp}" expression is valid\n`);
+	console.table(arrayList);
 }
 
-main()
-	.then(() => {
-		process.exit(0);
-	})
-	.catch((err) => {
-		console.error(err);
-		process.exit(1);
-	});
+let rl = readline.createInterface({
+	input: process.stdin,
+	output: process.stdout,
+});
+
+async function main(argv = process.argv) {
+	let [, , exp, count] = argv;
+
+	if (!exp) {
+		exp = await new Promise((resolve) => {
+			rl.question("Please enter an expression:", resolve);
+		});
+	}
+
+	if (!count) {
+		count = await new Promise((resolve) => {
+			rl.question("Please enter a count:", resolve);
+		});
+	}
+
+	handler(exp, +count)
+		.then(() => {
+			process.exit(0);
+		})
+		.catch((err) => {
+			console.error(err);
+			process.exit(1);
+		});
+}
+
+main();
