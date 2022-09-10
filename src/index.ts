@@ -41,7 +41,7 @@ async function handler(exp: string, count: number) {
 
 	const arrayList = builder(exp, count);
 
-	console.log("\x1b[32m%s\x1b[0m", "[DONE]", `"${exp}" expression is valid\n`);
+	console.log("\x1b[32m%s\x1b[0m", "[DONE]", `Generated Table:\n`);
 	console.table(arrayList);
 }
 
