@@ -14,7 +14,6 @@ Write a string generator that takes a regular expression as argument and returns
 
 ### Dependencies
 
-* Mac OS Monterey
 * [Node.js](http://nodejs.org/)
 
 ### Installing
