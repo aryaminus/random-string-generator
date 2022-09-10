@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Generates list of string from regex",
   "main": "src/index.ts",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "start": "ts-node-dev src/index.ts",
     "start:respawn": "ts-node-dev --respawn --transpile-only src/index.ts",
